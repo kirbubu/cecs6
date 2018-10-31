@@ -30,5 +30,21 @@ namespace BusinessLayer
 
         void RemoveStudent(Student st);
         #endregion
+
+        #region Teacher
+        IEnumerable<Teacher> GetAllTeachers();
+
+        Teacher GetTeacherByID(int id);
+
+        void AddTeacher(Teacher teacher);
+
+        void UpdateTeacher(Teacher teacher);
+
+        void UpdateTeacher(int id);
+
+        void RemoveTeacher(Teacher teacher);
+
+        IEnumerable<Course> GetTeacherCourses(int id);
+        #endregion
     }
 }

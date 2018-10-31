@@ -72,6 +72,7 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="IStandardRepository.cs" />
     <Compile Include="IStudentRepository.cs" />
+    <Compile Include="ITeacherRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Teacher.cs">
       <DependentUpon>SchoolDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TeacherRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

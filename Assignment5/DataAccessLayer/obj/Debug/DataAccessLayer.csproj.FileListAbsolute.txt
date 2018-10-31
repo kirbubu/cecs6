@@ -24,3 +24,17 @@ C:\cecs475sp18\Assignment5\DataAccessLayer\obj\Debug\DataAccessLayer.csprojResol
 C:\cecs475sp18\Assignment5\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CoreCompileInputs.cache
 C:\cecs475sp18\Assignment5\DataAccessLayer\obj\Debug\DataAccessLayer.exe
 C:\cecs475sp18\Assignment5\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+C:\Users\philp\Documents\GitHub\cecs6\Assignment5\DataAccessLayer\bin\Debug\SchoolDB.mdf
+C:\Users\philp\Documents\GitHub\cecs6\Assignment5\DataAccessLayer\bin\Debug\SchoolDB_log.ldf
+C:\Users\philp\Documents\GitHub\cecs6\Assignment5\DataAccessLayer\bin\Debug\DataAccessLayer.exe.config
+C:\Users\philp\Documents\GitHub\cecs6\Assignment5\DataAccessLayer\bin\Debug\DataAccessLayer.exe
+C:\Users\philp\Documents\GitHub\cecs6\Assignment5\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\philp\Documents\GitHub\cecs6\Assignment5\DataAccessLayer\bin\Debug\EntityFramework.dll
+C:\Users\philp\Documents\GitHub\cecs6\Assignment5\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\philp\Documents\GitHub\cecs6\Assignment5\DataAccessLayer\bin\Debug\EntityFramework.xml
+C:\Users\philp\Documents\GitHub\cecs6\Assignment5\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\philp\Documents\GitHub\cecs6\Assignment5\DataAccessLayer\obj\Debug\DataAccessLayer.csprojAssemblyReference.cache
+C:\Users\philp\Documents\GitHub\cecs6\Assignment5\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\philp\Documents\GitHub\cecs6\Assignment5\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CopyComplete
+C:\Users\philp\Documents\GitHub\cecs6\Assignment5\DataAccessLayer\obj\Debug\DataAccessLayer.exe
+C:\Users\philp\Documents\GitHub\cecs6\Assignment5\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
