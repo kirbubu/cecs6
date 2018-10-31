@@ -69,6 +69,8 @@
     <Compile Include="Course.cs">
       <DependentUpon>SchoolDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CourseRepository.cs" />
+    <Compile Include="ICourseRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IStandardRepository.cs" />
     <Compile Include="IStudentRepository.cs" />

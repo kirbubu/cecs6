@@ -10,12 +10,14 @@ namespace BusinessLayer
         private readonly IStandardRepository _standardRepository;
         private readonly IStudentRepository _studentRepository;
         private readonly ITeacherRepository _teacherRepository;
+        private readonly ICourseRepository _courseRepository;
 
         public BusinessLayer()
         {
             _standardRepository = new StandardRepository();
             _studentRepository = new StudentRepository();
             _teacherRepository = new TeacherRepository();
+            _courseRepository = new CourseRepository();
         }
 
         #region Standard
@@ -115,6 +117,38 @@ namespace BusinessLayer
             return _teacherRepository.GetById(id).Courses;
         }
 
+        #endregion
+
+        #region Course
+        public IEnumerable<Course> GetAllCourses()
+        {
+            return _courseRepository.GetAll();
+        }
+
+        public Course GetCourseByID(int id)
+        {
+            return _courseRepository.GetById(id);
+        }
+
+        public void AddCourse(Course course)
+        {
+            _courseRepository.Insert(course);
+        }
+
+        public void UpdateCourse(Course course)
+        {
+            _courseRepository.Update(course);
+        }
+
+        public void UpdateCourse(int id)
+        {
+            _courseRepository.Update(_courseRepository.GetById(id));
+        }
+
+        public void RemoveCourse(Course course)
+        {
+            _courseRepository.Delete(course);
+        }
         #endregion
 
 

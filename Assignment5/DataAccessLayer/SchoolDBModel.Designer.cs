@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Matthew\Documents\GitHub\CECS475-Assignment5\Assignment5\DataAccessLayer\SchoolDBModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\varga\Desktop\CECS_475\CECS_475_Lab5_Collab\cecs6\Assignment5\DataAccessLayer\SchoolDBModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

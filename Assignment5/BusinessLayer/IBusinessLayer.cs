@@ -46,5 +46,13 @@ namespace BusinessLayer
 
         IEnumerable<Course> GetTeacherCourses(int id);
         #endregion
+
+        #region Course
+        IEnumerable<Course> GetAllCourses();
+        Course GetCourseByID(int id);
+        void AddCourse(Course course);
+        void UpdateCourse(Course course);
+        void RemoveCourse(Course course);
+        #endregion
     }
 }
