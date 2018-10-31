@@ -1,8 +1,0 @@
-C:\Users\philp\Documents\Visual Studio 2017\Projects\CECS 475 Assignment 6\CECS 475 Assignment 6\bin\Debug\netcoreapp2.1\CECS 475 Assignment 6.deps.json
-C:\Users\philp\Documents\Visual Studio 2017\Projects\CECS 475 Assignment 6\CECS 475 Assignment 6\bin\Debug\netcoreapp2.1\CECS 475 Assignment 6.runtimeconfig.json
-C:\Users\philp\Documents\Visual Studio 2017\Projects\CECS 475 Assignment 6\CECS 475 Assignment 6\bin\Debug\netcoreapp2.1\CECS 475 Assignment 6.runtimeconfig.dev.json
-C:\Users\philp\Documents\Visual Studio 2017\Projects\CECS 475 Assignment 6\CECS 475 Assignment 6\bin\Debug\netcoreapp2.1\CECS 475 Assignment 6.dll
-C:\Users\philp\Documents\Visual Studio 2017\Projects\CECS 475 Assignment 6\CECS 475 Assignment 6\obj\Debug\netcoreapp2.1\CECS 475 Assignment 6.csprojAssemblyReference.cache
-C:\Users\philp\Documents\Visual Studio 2017\Projects\CECS 475 Assignment 6\CECS 475 Assignment 6\obj\Debug\netcoreapp2.1\CECS 475 Assignment 6.csproj.CoreCompileInputs.cache
-C:\Users\philp\Documents\Visual Studio 2017\Projects\CECS 475 Assignment 6\CECS 475 Assignment 6\obj\Debug\netcoreapp2.1\CECS 475 Assignment 6.AssemblyInfoInputs.cache
-C:\Users\philp\Documents\Visual Studio 2017\Projects\CECS 475 Assignment 6\CECS 475 Assignment 6\obj\Debug\netcoreapp2.1\CECS 475 Assignment 6.AssemblyInfo.cs
