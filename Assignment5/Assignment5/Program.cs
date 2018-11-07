@@ -93,8 +93,8 @@ namespace Assignment5
                         case 6:
                             break;
                         case 7:
-                            if (RemoveCourse(blayer))
-                                Console.WriteLine("Course was removed!");
+                            RemoveCourse(blayer);
+                            Console.WriteLine("Course was removed!");
                             break;
                         case 8:
                             coursesList = blayer.GetAllCourses();
@@ -130,8 +130,6 @@ namespace Assignment5
             {
                 Console.Write("\nEnter a course name: ");
                 string name = Console.ReadLine();
-                //Console.Write("\nEnter course location: ");
-                //string location = Console.ReadLine();
                 t = new Course
                 {
                     CourseName = name,
@@ -144,15 +142,30 @@ namespace Assignment5
             return null;
         }
 
-        public static bool RemoveCourse(IBusinessLayer DataAccess)
+        public static void RemoveCourse(IBusinessLayer DataAccess)
         {
             IEnumerable<Course> courseList = DataAccess.GetAllCourses();
+            Console.WriteLine("\nCourse List...");
             foreach (Course course in courseList)
             {
                 Console.WriteLine(course.CourseId + " " + course.CourseName);
             }
+            Course selected;
+            Console.Write("\nEnter course id to remove: ");
+            try
+            {
+                int courseID = Convert.ToInt32(Console.ReadLine());
+                selected = DataAccess.GetCourseByID(courseID);
+                if (selected != null){
+                    DataAccess.RemoveCourse(selected);
+                    Console.WriteLine(selected.CourseName + " has been removed!");
+                }
 
-            return false;
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("invalid input");
+            }
         }
 
         public static Teacher AddTeacher()
