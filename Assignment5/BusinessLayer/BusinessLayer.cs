@@ -149,6 +149,13 @@ namespace BusinessLayer
         {
             _courseRepository.Delete(course);
         }
+
+        public Course GetCourseByName(string name)
+        {
+            return _courseRepository.GetSingle(
+                c => c.CourseName.Equals(name),
+                c => c.Students);
+        }
         #endregion
 
 

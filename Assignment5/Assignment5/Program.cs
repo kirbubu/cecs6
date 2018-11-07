@@ -18,27 +18,14 @@ namespace Assignment5
             IEnumerable<Teacher> teachers = blayer.GetAllTeachers();
             IEnumerable<Course> courses = blayer.GetTeacherCourses(5);
             IEnumerable<Course> coursesList = blayer.GetAllCourses();
-
-            //foreach (Course c in courses)
-            //{
-            //    Console.WriteLine(c.CourseName);
-            //}
-
-            //foreach (Student s in students)
-            //{
-            //    Console.WriteLine(s.StudentName);
-            //}
-
-            //foreach (Teacher t in teachers)
-            //{
-            //    Console.WriteLine(t.TeacherName + " ID: " + t.TeacherId);
-            //}
-
-            //foreach (var c in coursesList)
-            //{
-            //    Console.WriteLine(c.CourseName);
-            //}
-
+            foreach (var s in blayer.GetAllStudents())
+            {
+                Console.WriteLine(s.StudentName);
+                foreach (var c in s.Courses)
+                {
+                    Console.WriteLine(c.CourseName);
+                }
+            }
             bool exit = false;
             while (!exit)
             {
@@ -52,10 +39,11 @@ namespace Assignment5
                     "\n\n" +
                     "Course Actions:\n" +
                     "[5] Create\n" +
-                    "[6] Update\n" +
-                    "[7] Delete\n" +
-                    "[8] Display All\n" +
-                    "[0] Exit");
+                    "[6] Update using Course ID\n" +
+                    "[7] Update using Course Name\n" +
+                    "[8] Delete\n" +
+                    "[9] Display All\n" +
+                    "\n[0] Exit");
                 Console.Write("Choice: ");
                 try
                 {
@@ -71,37 +59,26 @@ namespace Assignment5
                             }
                             break;
                         case 2:
-                        
                             break;
                         case 3:
                             break;
                         case 4:
-                            teachers = blayer.GetAllTeachers();
-                            foreach (var teacher in teachers)
-                            {
-                                Console.WriteLine(teacher.TeacherName + " ID: " + teacher.TeacherId);
-                            }
+                            DisplayAll<Teacher>(blayer);
                             break;
                         case 5:
-                            Course c = AddCourse();
-                            if (c != null)
-                            {
-                                blayer.AddCourse(c);
-                                Console.WriteLine("Course Added!");
-                            }
+                            AddCourse(blayer);
                             break;
                         case 6:
+                            ModifyCourseByID(blayer);
                             break;
                         case 7:
-                            RemoveCourse(blayer);
-                            Console.WriteLine("Course was removed!");
+                            ModifyCourseByName(blayer);
                             break;
                         case 8:
-                            coursesList = blayer.GetAllCourses();
-                            foreach (var course in coursesList)
-                            {
-                                Console.WriteLine(course.CourseName);
-                            }
+                            RemoveCourse(blayer);
+                            break;
+                        case 9:
+                            DisplayAll<Course>(blayer);
                             break;
                         case 0:
                             exit = true;
@@ -118,38 +95,56 @@ namespace Assignment5
                     Console.WriteLine("Wrong input type.\nPress any key to continue...");
                     Console.ReadKey();
                 }
-            }  
-            
-            
+            }    
         }
 
-        public static Course AddCourse()
+        public static void AddCourse(IBusinessLayer DataAccess)
         {
             Course t;
             try
             {
                 Console.Write("\nEnter a course name: ");
                 string name = Console.ReadLine();
-                t = new Course
+                if (name.Length > 0)
                 {
-                    CourseName = name,
-                };
-                return t;
+                    t = new Course
+                    {
+                        CourseName = name,
+                    };
+                    DataAccess.AddCourse(t);
+                }
             } catch (Exception)
             {
-
+                Console.WriteLine("invalid input");
             }
-            return null;
+        }
+
+        public static void DisplayAll<T>(IBusinessLayer DataAccess)
+        {
+            if (DataAccess != null)
+            {
+                if (typeof(T).Equals(typeof(Course)))
+                {
+                    foreach (var course in DataAccess.GetAllCourses())
+                    {
+                        Console.WriteLine(course.CourseId + " " + course.CourseName);
+                    }
+                    return;
+                }
+                if (typeof(T).Equals(typeof(Teacher)))
+                {
+                    foreach (var teacher in DataAccess.GetAllTeachers())
+                    {
+                        Console.WriteLine(teacher.TeacherId + " " + teacher.TeacherName);
+                    }
+                    return;
+                }
+            }
         }
 
         public static void RemoveCourse(IBusinessLayer DataAccess)
         {
-            IEnumerable<Course> courseList = DataAccess.GetAllCourses();
-            Console.WriteLine("\nCourse List...");
-            foreach (Course course in courseList)
-            {
-                Console.WriteLine(course.CourseId + " " + course.CourseName);
-            }
+            DisplayAll<Course>(DataAccess);
             Course selected;
             Console.Write("\nEnter course id to remove: ");
             try
@@ -157,10 +152,14 @@ namespace Assignment5
                 int courseID = Convert.ToInt32(Console.ReadLine());
                 selected = DataAccess.GetCourseByID(courseID);
                 if (selected != null){
+                    foreach (var student in selected.Students)
+                    {
+                        student.Courses.Remove(selected);
+                    }
+                    selected.Teacher.Courses.Remove(selected);
                     DataAccess.RemoveCourse(selected);
                     Console.WriteLine(selected.CourseName + " has been removed!");
                 }
-
             }
             catch (Exception)
             {
@@ -188,6 +187,77 @@ namespace Assignment5
         public static bool RemoveTeacher(IBusinessLayer DataAccess)
         {
             return false;
+        }
+
+        public static void ModifyCourseByID(IBusinessLayer DataAccess)
+        {
+            Console.WriteLine();
+            DisplayAll<Course>(DataAccess);
+            Console.Write("\nModify Course with ID: ");
+            Course selected;
+            try
+            {
+                int courseID = Convert.ToInt32(Console.ReadLine());
+                selected = DataAccess.GetCourseByID(courseID);
+                if (selected != null)
+                {
+                    bool valid = false;
+                    while (!valid)
+                    {
+                        Console.Write("\nNew name: ");
+                        string name = Console.ReadLine();
+                        if (name.Length > 0)
+                        {
+                            selected.CourseName = name;
+                            Console.WriteLine(selected.CourseName + " has been modified!");
+                            DataAccess.UpdateCourse(selected);
+                            valid = true;
+                        }
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("invalid input");
+            }
+        }
+
+        public static void ModifyCourseByName(IBusinessLayer DataAccess)
+        {
+            Console.WriteLine();
+            DisplayAll<Course>(DataAccess);
+            Console.Write("\nModify Course with Name: ");
+            Course result;
+            Course selected = null;
+            try
+            {
+                string courseName = Console.ReadLine();
+                Console.WriteLine(DataAccess.GetCourseByName(courseName).CourseName);
+                result = DataAccess.GetCourseByName(courseName);
+                if (result != null)
+                    selected = DataAccess.GetCourseByID(result.CourseId);
+                if (selected != null)
+                {
+                    bool valid = false;
+                    while (!valid)
+                    {
+                        Console.Write("\nNew name: ");
+                        string name = Console.ReadLine();
+                        if (name.Length > 0)
+                        {
+                            selected.CourseName = name;
+                            Console.WriteLine(selected.CourseName + " has been modified!");
+                            DataAccess.UpdateCourse(selected);
+                            valid = true;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("invalid input");
+            }
         }
     }
 
