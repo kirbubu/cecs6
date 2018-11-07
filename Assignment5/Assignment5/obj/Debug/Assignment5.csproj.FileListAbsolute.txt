@@ -76,3 +76,7 @@ C:\Users\varga\Desktop\CECS_475\CECS_475_Lab5_Collab\cecs6\Assignment5\Assignmen
 C:\Users\varga\Desktop\CECS_475\CECS_475_Lab5_Collab\cecs6\Assignment5\Assignment5\obj\Debug\Assignment5.csproj.CopyComplete
 C:\Users\varga\Desktop\CECS_475\CECS_475_Lab5_Collab\cecs6\Assignment5\Assignment5\obj\Debug\Assignment5.exe
 C:\Users\varga\Desktop\CECS_475\CECS_475_Lab5_Collab\cecs6\Assignment5\Assignment5\obj\Debug\Assignment5.pdb
+C:\Users\philp\Documents\GitHub\cecs6\Assignment5\Assignment5\bin\Debug\SqlServerTypes\x64\msvcr120.dll
+C:\Users\philp\Documents\GitHub\cecs6\Assignment5\Assignment5\bin\Debug\SqlServerTypes\x64\SqlServerSpatial140.dll
+C:\Users\philp\Documents\GitHub\cecs6\Assignment5\Assignment5\bin\Debug\SqlServerTypes\x86\msvcr120.dll
+C:\Users\philp\Documents\GitHub\cecs6\Assignment5\Assignment5\bin\Debug\SqlServerTypes\x86\SqlServerSpatial140.dll
