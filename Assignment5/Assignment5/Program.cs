@@ -59,8 +59,10 @@ namespace Assignment5
                             }
                             break;
                         case 2:
+                            UpdateTeacher(blayer);
                             break;
                         case 3:
+                            RemoveTeacher(blayer);
                             break;
                         case 4:
                             DisplayAll<Teacher>(blayer);
@@ -184,8 +186,57 @@ namespace Assignment5
             return null;
         }
 
+        public static Teacher UpdateTeacher(IBusinessLayer DataAccess)
+        {
+            IEnumerable<Teacher> teacherList = DataAccess.GetAllTeachers();
+            Console.WriteLine("\nTeacher List...");
+            foreach (Teacher teacher in teacherList)
+            {
+                Console.WriteLine(teacher.TeacherId + " " + teacher.TeacherName);
+            }
+            Console.Write("\nEnter a teacher id to update: ");
+            Teacher selected;
+            try
+            {
+                int teacherID = Convert.ToInt32(Console.ReadLine());
+                selected = DataAccess.GetTeacherByID(teacherID);
+                Console.WriteLine("\nEnter a new teacher name");
+                string name = Console.ReadLine();
+                selected.TeacherName = name;
+                return selected;
+            }
+            catch (Exception)
+            {
+
+            }
+            return null;
+        }
+
         public static bool RemoveTeacher(IBusinessLayer DataAccess)
         {
+            IEnumerable<Teacher> teacherList = DataAccess.GetAllTeachers();
+            Console.WriteLine("\nCourse List...");
+            foreach (Teacher teacher in teacherList)
+            {
+                Console.WriteLine(teacher.TeacherId + " " + teacher.TeacherName);
+            }
+            Teacher selected;
+            Console.Write("\nEnter teacher id to remove: ");
+            try
+            {
+                int teacherID = Convert.ToInt32(Console.ReadLine());
+                selected = DataAccess.GetTeacherByID(teacherID);
+                if (selected != null)
+                {
+                    DataAccess.RemoveTeacher(selected);
+                    Console.WriteLine(selected.TeacherName + " has been removed!");
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("invalid input");
+            }
             return false;
         }
 
