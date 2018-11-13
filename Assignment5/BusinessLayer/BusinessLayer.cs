@@ -117,6 +117,12 @@ namespace BusinessLayer
             return _teacherRepository.GetById(id).Courses;
         }
 
+        public Teacher GetTeacherByName(string name)
+        {
+            return _teacherRepository.GetSingle(
+                c => c.TeacherName.Equals(name),
+                c => c.Courses);
+        }
         #endregion
 
         #region Course

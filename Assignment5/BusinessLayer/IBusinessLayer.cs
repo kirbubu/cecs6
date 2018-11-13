@@ -45,6 +45,8 @@ namespace BusinessLayer
         void RemoveTeacher(Teacher teacher);
 
         IEnumerable<Course> GetTeacherCourses(int id);
+
+        Teacher GetTeacherByName(string name);
         #endregion
 
         #region Course
