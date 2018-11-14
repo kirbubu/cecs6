@@ -168,7 +168,7 @@ namespace Assignment5
                         student.Courses.Remove(selected);
                     }
                     //selected.Teacher.Courses.Remove(selected);
-                    DataAccess.RemoveCourse(courseID);
+                    DataAccess.RemoveCourse(selected);
                     Console.WriteLine(selected.CourseName + " has been removed!");
                 }
             }
@@ -212,22 +212,11 @@ namespace Assignment5
                 Console.WriteLine("\nEnter a new teacher name");
                 string name = Console.ReadLine();
                 selected.TeacherName = name;
-                Console.WriteLine("\nEnter a courseIDs of the teacher");
-                string[] input = Console.ReadLine().Split(' ');
-                ICollection<Course> courseIDs = new List<Course>();
-                //Add the courses from the list of courses instead of making new ones (making new ones adds to courses)
-                foreach(var id in input)
-                {
-                    courseIDs.Add(DataAccess.GetAllCourses().First(c => c.CourseId == Convert.ToInt32(id)));
-                }
-                selected.Courses = courseIDs;
-                foreach(var course in selected.Courses)
-                {
-                    Console.WriteLine(course.CourseId);
-                }
+                
 
-                //Update teacher with the selected ID 
-                DataAccess.UpdateTeacher(teacherID);
+
+            //Update teacher with the selected ID 
+            DataAccess.UpdateTeacher(teacherID);
                 return selected;
             //}
   
@@ -255,20 +244,6 @@ namespace Assignment5
                     Console.WriteLine("\nEnter a new teacher name");
                     string name = Console.ReadLine();
                     selected.TeacherName = name;
-                    Console.WriteLine("\nEnter a courseIDs of the teacher");
-                    string[] input = Console.ReadLine().Split(' ');
-                    ICollection<Course> courseIDs = new List<Course>();
-                    //Add the courses from the list of courses instead of making new ones (making new ones adds to courses)
-                    foreach (var id in input)
-                    {
-                        courseIDs.Add(DataAccess.GetAllCourses().First(c => c.CourseId == Convert.ToInt32(id)));
-                    }
-                    selected.Courses = courseIDs;
-                    foreach (var course in selected.Courses)
-                    {
-                        Console.WriteLine(course.CourseId);
-                    }
-                    //Update teacher
                     DataAccess.UpdateTeacher(selected.TeacherId);
                     return selected;
                 }
@@ -329,6 +304,9 @@ namespace Assignment5
                         if (name.Length > 0)
                         {
                             selected.CourseName = name;
+                            Console.WriteLine("New teacher id: ");
+                            int teacherId = Convert.ToInt32(Console.ReadLine());
+                            selected.TeacherId = teacherId;
                             Console.WriteLine(selected.CourseName + " has been modified!");
                             DataAccess.UpdateCourse(selected);
                             valid = true;
@@ -367,6 +345,9 @@ namespace Assignment5
                         if (name.Length > 0)
                         {
                             selected.CourseName = name;
+                            Console.WriteLine("New teacher id: ");
+                            int teacherId = Convert.ToInt32(Console.ReadLine());
+                            selected.TeacherId = teacherId;
                             Console.WriteLine(selected.CourseName + " has been modified!");
                             DataAccess.UpdateCourse(selected);
                             valid = true;
