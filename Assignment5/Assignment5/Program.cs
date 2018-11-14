@@ -1,6 +1,7 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,6 @@ namespace Assignment5
             IBusinessLayer blayer = new BusinessLayer.BusinessLayer();
             IEnumerable<Student> students = blayer.GetAllStudents();
             IEnumerable<Teacher> teachers = blayer.GetAllTeachers();
-            IEnumerable<Course> courses = blayer.GetTeacherCourses(5);
             IEnumerable<Course> coursesList = blayer.GetAllCourses();
 
             bool exit = false;
@@ -26,8 +26,13 @@ namespace Assignment5
                     "\nMenu\n" +
                     "Teach Actions:\n" +
                     "[1] Create\n" +
+<<<<<<< HEAD
                     "[2] Update using Teacher by ID\n" +
                     "[3] Update using Teacher by NAme\n" +
+=======
+                    "[2] Update using Teacher ID\n" +
+                    "[3] Update using Teacher Name\n" +
+>>>>>>> Philip
                     "[4] Delete\n" +
                     "[5] Display All" +
                     "\n\n" +
@@ -48,10 +53,17 @@ namespace Assignment5
                             AddEntity<Teacher>(blayer);
                             break;
                         case 2:
+<<<<<<< HEAD
                             ModifyTeacherByID(blayer);
                             break;
                         case 3:
                             ModifyTeacherByName(blayer);
+=======
+                            UpdateTeacher(blayer);
+                            break;
+                        case 3:
+                            UpdateTeacherByName(blayer);
+>>>>>>> Philip
                             break;
                         case 4:
                             RemoveTeacher(blayer);
@@ -60,7 +72,11 @@ namespace Assignment5
                             DisplayAll<Teacher>(blayer);
                             break;
                         case 6:
+<<<<<<< HEAD
                             AddEntity<Course>(blayer);
+=======
+                            AddCourse(blayer);
+>>>>>>> Philip
                             break;
                         case 7:
                             ModifyCourseByID(blayer);
@@ -143,6 +159,11 @@ namespace Assignment5
                     foreach (var teacher in DataAccess.GetAllTeachers())
                     {
                         Console.WriteLine(teacher.TeacherId + " " + teacher.TeacherName);
+                        Console.WriteLine("Teacher courses:");
+                        foreach(var course in teacher.Courses)
+                        {
+                            Console.WriteLine(course.CourseName + " | ID: " + course.CourseId);
+                        }
                     }
                     return;
                 }
@@ -163,7 +184,7 @@ namespace Assignment5
                     {
                         student.Courses.Remove(selected);
                     }
-                    selected.Teacher.Courses.Remove(selected);
+                    //selected.Teacher.Courses.Remove(selected);
                     DataAccess.RemoveCourse(selected);
                     Console.WriteLine(selected.CourseName + " has been removed!");
                 }
@@ -219,6 +240,98 @@ namespace Assignment5
             return null;
         }
 
+<<<<<<< HEAD
+=======
+        public static Teacher UpdateTeacher(IBusinessLayer DataAccess)
+        {
+            IEnumerable<Teacher> teacherList = DataAccess.GetAllTeachers();
+            Console.WriteLine("\nTeacher List...");
+            foreach (Teacher teacher in teacherList)
+            {
+                Console.WriteLine(teacher.TeacherId + " " + teacher.TeacherName);
+            }
+            Console.Write("\nEnter a teacher id to update: ");
+            Teacher selected;
+            //try
+            //{
+                int teacherID = Convert.ToInt32(Console.ReadLine());
+                selected = DataAccess.GetTeacherByID(teacherID);
+                Console.WriteLine("\nEnter a new teacher name");
+                string name = Console.ReadLine();
+                selected.TeacherName = name;
+                
+
+
+            //Update teacher with the selected ID 
+            DataAccess.UpdateTeacher(teacherID);
+                return selected;
+            //}
+  
+            return null;
+        }
+
+        public static Teacher UpdateTeacherByName(IBusinessLayer DataAccess)
+        {
+            IEnumerable<Teacher> teacherList = DataAccess.GetAllTeachers();
+            Console.WriteLine("\nTeacher List...");
+            foreach (Teacher teacher in teacherList)
+            {
+                Console.WriteLine(teacher.TeacherId + " " + teacher.TeacherName);
+            }
+            Console.Write("\nEnter a teacher name to update: ");
+            Teacher selected = null;
+            try
+            {
+                string teacherName = Console.ReadLine();
+                Teacher result = DataAccess.GetTeacherByName(teacherName);
+                if (result != null)
+                    selected = DataAccess.GetTeacherByID(result.TeacherId);
+                if (selected != null)
+                {
+                    Console.WriteLine("\nEnter a new teacher name");
+                    string name = Console.ReadLine();
+                    selected.TeacherName = name;
+                    DataAccess.UpdateTeacher(selected.TeacherId);
+                    return selected;
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return null;
+        }
+
+
+        public static bool RemoveTeacher(IBusinessLayer DataAccess)
+        {
+            IEnumerable<Teacher> teacherList = DataAccess.GetAllTeachers();
+            Console.WriteLine("\nCourse List...");
+            foreach (Teacher teacher in teacherList)
+            {
+                Console.WriteLine(teacher.TeacherId + " " + teacher.TeacherName);
+            }
+            Teacher selected;
+            Console.Write("\nEnter teacher id to remove: ");
+            try
+            {
+                int teacherID = Convert.ToInt32(Console.ReadLine());
+                selected = DataAccess.GetTeacherByID(teacherID);
+                if (selected != null)
+                {
+                    DataAccess.RemoveTeacher(selected);
+                    Console.WriteLine(selected.TeacherName + " has been removed!");
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("invalid input");
+            }
+            return false;
+        }
+
+>>>>>>> Philip
         public static void ModifyCourseByID(IBusinessLayer DataAccess)
         {
             Console.WriteLine();
@@ -239,6 +352,9 @@ namespace Assignment5
                         if (name.Length > 0)
                         {
                             selected.CourseName = name;
+                            Console.WriteLine("New teacher id: ");
+                            int teacherId = Convert.ToInt32(Console.ReadLine());
+                            selected.TeacherId = teacherId;
                             Console.WriteLine(selected.CourseName + " has been modified!");
                             DataAccess.UpdateCourse(selected);
                             valid = true;
@@ -277,6 +393,9 @@ namespace Assignment5
                         if (name.Length > 0)
                         {
                             selected.CourseName = name;
+                            Console.WriteLine("New teacher id: ");
+                            int teacherId = Convert.ToInt32(Console.ReadLine());
+                            selected.TeacherId = teacherId;
                             Console.WriteLine(selected.CourseName + " has been modified!");
                             DataAccess.UpdateCourse(selected);
                             valid = true;
