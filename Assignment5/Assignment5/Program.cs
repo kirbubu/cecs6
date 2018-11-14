@@ -17,7 +17,6 @@ namespace Assignment5
             IBusinessLayer blayer = new BusinessLayer.BusinessLayer();
             IEnumerable<Student> students = blayer.GetAllStudents();
             IEnumerable<Teacher> teachers = blayer.GetAllTeachers();
-            IEnumerable<Course> courses = blayer.GetTeacherCourses(5);
             IEnumerable<Course> coursesList = blayer.GetAllCourses();
             foreach (var s in blayer.GetAllStudents())
             {
@@ -168,8 +167,8 @@ namespace Assignment5
                     {
                         student.Courses.Remove(selected);
                     }
-                    selected.Teacher.Courses.Remove(selected);
-                    DataAccess.RemoveCourse(selected);
+                    //selected.Teacher.Courses.Remove(selected);
+                    DataAccess.RemoveCourse(courseID);
                     Console.WriteLine(selected.CourseName + " has been removed!");
                 }
             }
@@ -206,8 +205,8 @@ namespace Assignment5
             }
             Console.Write("\nEnter a teacher id to update: ");
             Teacher selected;
-            try
-            {
+            //try
+            //{
                 int teacherID = Convert.ToInt32(Console.ReadLine());
                 selected = DataAccess.GetTeacherByID(teacherID);
                 Console.WriteLine("\nEnter a new teacher name");
@@ -216,6 +215,7 @@ namespace Assignment5
                 Console.WriteLine("\nEnter a courseIDs of the teacher");
                 string[] input = Console.ReadLine().Split(' ');
                 ICollection<Course> courseIDs = new List<Course>();
+                //Add the courses from the list of courses instead of making new ones (making new ones adds to courses)
                 foreach(var id in input)
                 {
                     courseIDs.Add(DataAccess.GetAllCourses().First(c => c.CourseId == Convert.ToInt32(id)));
@@ -225,13 +225,12 @@ namespace Assignment5
                 {
                     Console.WriteLine(course.CourseId);
                 }
-                DataAccess.UpdateTeacher(selected.TeacherId);
-                return selected;
-            }
-            catch (Exception)
-            {
 
-            }
+                //Update teacher with the selected ID 
+                DataAccess.UpdateTeacher(teacherID);
+                return selected;
+            //}
+  
             return null;
         }
 
@@ -259,15 +258,17 @@ namespace Assignment5
                     Console.WriteLine("\nEnter a courseIDs of the teacher");
                     string[] input = Console.ReadLine().Split(' ');
                     ICollection<Course> courseIDs = new List<Course>();
+                    //Add the courses from the list of courses instead of making new ones (making new ones adds to courses)
                     foreach (var id in input)
                     {
-                        courseIDs.Add(new Course() { CourseId = Convert.ToInt32(id), CourseName = DataAccess.GetCourseByID(Convert.ToInt32(id)).CourseName });
+                        courseIDs.Add(DataAccess.GetAllCourses().First(c => c.CourseId == Convert.ToInt32(id)));
                     }
                     selected.Courses = courseIDs;
                     foreach (var course in selected.Courses)
                     {
                         Console.WriteLine(course.CourseId);
                     }
+                    //Update teacher
                     DataAccess.UpdateTeacher(selected.TeacherId);
                     return selected;
                 }

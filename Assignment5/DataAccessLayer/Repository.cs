@@ -15,6 +15,8 @@ namespace DataAccessLayer
 
         public Repository(DbContext context)
         {
+            SqlProviderServices.SqlServerTypesAssemblyName = "Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91";
+            SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
             this.context = context;
             dbset = context.Set<T>();
         }
@@ -22,24 +24,24 @@ namespace DataAccessLayer
         public void Insert(T entity)
         {
             SqlProviderServices.SqlServerTypesAssemblyName = "Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91";
-            context.Entry(entity).State = EntityState.Added;
             SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
+            context.Entry(entity).State = EntityState.Added;
             context.SaveChanges();
         }
 
         public void Delete(T entity)
         {
             SqlProviderServices.SqlServerTypesAssemblyName = "Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91";
-            context.Entry(entity).State = EntityState.Deleted;
             SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
-            context.SaveChanges(); ;
+            context.Entry(entity).State = EntityState.Deleted;
+            context.SaveChanges();
         }
 
         public void Update(T entity)
         {
             SqlProviderServices.SqlServerTypesAssemblyName = "Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91";
-            context.Entry(entity).State = EntityState.Modified;
             SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
+            context.Entry(entity).State = EntityState.Modified;
             context.SaveChanges();
         }
 

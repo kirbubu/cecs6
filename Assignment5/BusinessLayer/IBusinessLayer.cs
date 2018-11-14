@@ -55,6 +55,7 @@ namespace BusinessLayer
         void AddCourse(Course course);
         void UpdateCourse(Course course);
         void RemoveCourse(Course course);
+        void RemoveCourse(int id);
         Course GetCourseByName(string name);
         #endregion
     }

@@ -156,6 +156,11 @@ namespace BusinessLayer
             _courseRepository.Delete(course);
         }
 
+        public void RemoveCourse(int id)
+        {
+            _courseRepository.Delete(_courseRepository.GetById(id));
+        }
+
         public Course GetCourseByName(string name)
         {
             return _courseRepository.GetSingle(
